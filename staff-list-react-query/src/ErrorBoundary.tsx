@@ -5,7 +5,7 @@ import { Message } from 'semantic-ui-react';
 type StatusMessages = { [status: number]: string };
 type Props = { statusMessages?: StatusMessages };
 type State = { hasError: boolean; error: Error | null };
-const DEFAULT_MESSAGES: StatusMessages = { 0: 'サーバーエラーです' };
+const DEFAULT_MESSAGES: StatusMessages = { 0: 'サーバエラーです' };
 
 class ErrorBoundary extends PureComponent<Props, State> {
   constructor(props: Props) {
@@ -31,7 +31,7 @@ class ErrorBoundary extends PureComponent<Props, State> {
       const statusCode = (error as HTTPError)?.response?.status;
 
       if (statusCode && Object.keys(messages).includes(String(statusCode))) {
-        return <Message warning>[messages[statusCode]]</Message>;
+        return <Message warning>{messages[statusCode]}</Message>;
       }
 
       return <Message error>{messages[0]}</Message>;
